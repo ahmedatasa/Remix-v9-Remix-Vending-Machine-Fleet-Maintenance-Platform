@@ -1,0 +1,58 @@
+appId: com.vendingfleet.desktop
+productName: Vending Management System
+artifactName: "${productName}-${os}-${arch}.${ext}"
+
+directories:
+  output: release
+  buildResources: build
+
+files:
+  - dist/**/*
+  - electron/**/*
+  - package.json
+  - "!backend/**/*"
+  - "!src/**/*"
+  - "!migrations/**/*"
+  - "!database/**/*"
+  - "!*.md"
+  - "!*.sql"
+  - "!*.lock"
+  - "!alembic.ini"
+  - "!docker-compose.yml"
+  - "!server.ts"
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+    - target: portable
+      arch:
+        - x64
+  icon: build/icon.ico
+  executableName: Vending-Management
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Vending Management System
+  artifactName: "Vending-Management-Setup.${ext}"
+  uninstallDisplayName: Vending Management System
+
+portable:
+  artifactName: "Vending-Management-Portable.${ext}"
+
+linux:
+  target:
+    - target: AppImage
+      arch:
+        - x64
+    - target: deb
+      arch:
+        - x64
+  icon: build/icon.png
+  category: Utility
+  executableName: vending-management
